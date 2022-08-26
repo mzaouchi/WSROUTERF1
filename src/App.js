@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Contact from './Components/Contact';
+import Home from './Components/Home';
+import NavUser from './Components/NavUser';
+import Users from './Components/Users';
+import {Routes,Route} from 'react-router-dom'
+import { useState } from 'react';
+import Profile from './Components/Profile';
 
 function App() {
+  const [users,setUsers] = useState([
+    {name : 'Yaakoub',age :2, id : Math.random()},
+    {name : 'Amir',age :3, id : Math.random()},
+    {name : 'Amine',age :4, id : Math.random()},
+    {name : 'Ghazi',age :5, id : Math.random()}
+  ])
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div>
+      <NavUser/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/UsersList' element={<Users users={users}/>}/>
+        <Route path='/ContactPage' element={<Contact/>}/>
+        <Route path='/ProfileYaa/:id' element={<Profile users={users}/>}/>
+      </Routes>
     </div>
   );
 }
